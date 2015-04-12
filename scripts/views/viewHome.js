@@ -134,7 +134,7 @@ define([
 
             var citiesAtTemp = _this.cityCollection.select(function(city) {
                 var cityTemp = city.attributes.item.condition.temp;
-                return cityTemp < (temp + 3) && cityTemp > (temp - 3);
+                return cityTemp < (temp + 5) && cityTemp > (temp - 5);
             });
 
             _this.$el.find('.city').removeClass('show');
