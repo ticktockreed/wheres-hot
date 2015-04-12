@@ -27,12 +27,7 @@ define([
         ],
         cityCollection: null,
         tempQuery: 18,
-
-        events: {
-            'mouseup .slider .handle' : 'checkTemp',
-            'touchend .slider .handle' : 'checkTemp'
-        },
-
+        slider: null,
 
         initialize: function () {
             // this.render;
@@ -62,10 +57,34 @@ define([
         },
 
         initSlider: function() {
-            var sliderHeight = $('.slider').height(),
+
+            var _this =  this;
+            _this.slider = $('.slider');
+            
+            var sliderHeight = _this.slider.height(),
                 highTemp = 55,
                 lowTemp = -40,
-                tempRange = lowTemp - highTemp;
+                tempRange = lowTemp - highTemp, 
+                $value = _this.slider.find('.value'),
+                draggable;
+
+            // make the slider dragable with a bit of GSAP
+            Draggable.create('.handle', {
+                type:'y', 
+                edgeResistance:0.85, 
+                bounds:'.slider', 
+                throwProps:true,
+                onDragStart: function() {
+                    TweenLite.ticker.addEventListener('tick', setTemp);
+                },
+                //onThrowComplete is used by the ThrowProps tween. We'll stop updating the velocity when the tween is done.
+                onThrowComplete: function() {
+                    TweenLite.ticker.removeEventListener('tick', setTemp);
+                    _this.checkTemp();
+                }
+            });
+
+            draggable = Draggable.get('.handle');
 
             function setTemp() {
                 // calculate the temperature within the range specified
@@ -73,31 +92,13 @@ define([
                 var temp = -((position/sliderHeight * tempRange) - lowTemp);
 
                 // update the number
-                $(draggable.target).html(Math.ceil(temp));
+                $value.text(Math.round(temp));
             }
-
-            // make the slider dragable with a bit of GSAP
-            Draggable.create('.handle', {
-                type:'y', 
-                edgeResistance:0.85, 
-                bounds:'.slider', 
-                throwProps:true, 
-                onDrag: function() {
-                    TweenLite.ticker.addEventListener("tick", setTemp());
-                },
-                //onThrowComplete is used by the ThrowProps tween. We'll stop updating the velocity when the tween is done.
-                onThrowComplete: function() {
-                    TweenLite.ticker.removeEventListener("tick", setTemp());
-                }
-            });
-
-            var draggable = Draggable.get('.handle');
-
         },
 
-        checkTemp: function(e) {
+        checkTemp: function() {
             var _this = this,
-                temp = parseInt($(e.currentTarget).text());
+                temp = parseInt(_this.slider.find('.value').text());
 
 
             var hotterThanThat = _this.cityCollection.select(function(city) {
