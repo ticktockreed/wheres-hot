@@ -29,7 +29,8 @@ define([
         tempQuery: 18,
 
         events: {
-            'click .slider' : 'checkTemp'
+            'mouseup .slider .handle' : 'checkTemp',
+            'touchend .slider .handle' : 'checkTemp'
         },
 
 
@@ -43,25 +44,55 @@ define([
             _this.template = Mustache.to_html(layout);
             _this.$el.html(_this.template);
 
+            // create a collection four the cities
             _this.cityCollection = new CollectionCities();
 
-            // loop through our default list of cities
+            _this.initSlider();
+
+            // loop through the default list of cities
             for (var i = _this.cityQueries.length - 1; i >= 0; i--) {
                 var city = new ModelCity({name: _this.cityQueries[i].query});
+
+                // collect weather data for each city
                 city.fetch();
+
+                // add them to the collection
                 _this.cityCollection.add(city);
             };
         },
 
-        checkTemp: function() {
-            var _this = this;
+        initSlider: function() {
+            var sliderHeight = $('.slider').height(),
+                highTemp = 55,
+                lowTemp = -40,
+                tempRange =  lowTemp - highTemp;
+
+            // make the slider dragable with a bit of GSAP
+            Draggable.create('.handle', {
+                type:'x,y', 
+                edgeResistance:0.85, 
+                bounds:'.slider', 
+                throwProps:true, 
+                onDrag: function() {
+
+                    // calculate the temperature within the range specified
+                    var position = sliderHeight - this.y;
+                    var temp = -((position/sliderHeight * tempRange) - lowTemp);
+
+                    // update the number
+                    $(this.target).html(Math.ceil(temp));
+                }
+            });
+        },
+
+        checkTemp: function(e) {
+            var _this = this,
+                temp = parseInt($(e.currentTarget).text());
+
 
             var hotterThanThat = _this.cityCollection.select(function(city) {
-                return city.attributes.item.condition.temp > 18;
+                return city.attributes.item.condition.temp > temp;
             });
-
-            var logo = $('.slider');
-            TweenLite.to(logo, 1, {left:"632px"});
 
             console.log(hotterThanThat);
         }

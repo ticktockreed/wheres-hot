@@ -11,6 +11,8 @@ require.config({
         TweenLite: 'libs/greensock/TweenLite',
         CSSPlugin: 'libs/greensock/plugins/CSSPlugin',
         EasePack: 'libs/greensock/easing/EasePack',
+        Draggable: 'libs/greensock/utils/Draggable',
+        ThrowProps: 'libs/greensock/plugins/ThrowPropsPlugin',
 
         shim: {
             TweenLite: {
@@ -44,6 +46,8 @@ require([
     'TweenLite',
     'CSSPlugin',
     'EasePack',
+    'Draggable',
+    'ThrowProps',
     'underscore',
     'mustache'
 ], function (Backbone, WeatherApp) {
