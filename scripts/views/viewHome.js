@@ -131,7 +131,7 @@ define([
             var _this = this,
                 temp = parseInt(_this.slider.find('.value').text());
 
-
+            // check if the city's temperature sits within the range
             var citiesAtTemp = _this.cityCollection.select(function(city) {
                 var cityTemp = city.attributes.item.condition.temp;
                 return cityTemp < (temp + 5) && cityTemp > (temp - 5);
@@ -139,6 +139,7 @@ define([
 
             _this.$el.find('.city').removeClass('show');
 
+            // show the views that fit within the range
             for (var i = citiesAtTemp.length - 1; i >= 0; i--) {
                 var placeID = '#' + citiesAtTemp[i].attributes.placeID;
                 _this.$el.find(placeID).addClass('show');

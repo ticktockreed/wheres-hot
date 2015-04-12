@@ -78,11 +78,8 @@ header .app-title .cities {
 		top: 30%;
 		z-index: 10;
 	}
-}0;
-}
-@media screen and (max-width: 600px) {
-	.city .city-name {
-		font-size: 60px;
+	.city {
+		top: 30%;
 	}
 }
 .handle {
@@ -98,9 +95,11 @@ header .app-title .cities {
 }
 .city {
 	position: absolute;
-	opacity: 0;
+	top: 20%;
+	bottom: 0;
 	left: 0;
 	right: 0;
+	opacity: 0;
 	background-color: skyblue;
 	color: white;
   	min-height: 400px;
@@ -120,6 +119,12 @@ header .app-title .cities {
 	text-align: left;
 	font-size: 80px;
 }
+
+@media screen and (max-width: 600px) {
+	.city .city-name {
+		font-size: 50px;
+	}
+}
 .city .city-country {	
 	font-size: 30px;
 }
@@ -128,7 +133,7 @@ header .app-title .cities {
 	font-size: 70px;
 	position: absolute;
 	right: 0;
-	bottom: 0;
+	bottom: 10%;
 	padding: 20px;
 }
 
