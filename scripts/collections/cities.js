@@ -3,14 +3,15 @@
 define([
     'underscore',
     'backbone',
-    'city'
-], function (_, Backbone, City) {
+    'modelCity'
+], function (_, Backbone, ModelCity) {
     'use strict';
 
     var CitiesCollection = Backbone.Collection.extend({
-        model: City,
-        initialize: function() {
-            console.log('Cities initialized: ');
+
+        initialize: function(models, options) {
+            var _this = this;
+
         }
     });
 

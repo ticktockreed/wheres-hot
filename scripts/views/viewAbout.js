@@ -12,7 +12,7 @@ define([
     var aboutView = Backbone.View.extend({
         template: Mustache.to_html(aboutTplt),
 
-        el: '#weather_app',
+        el: '#wheresHot',
 
         initialize: function () {
             this.render;

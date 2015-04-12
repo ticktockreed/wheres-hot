@@ -1,3 +1,10 @@
 body {
     background-color: skyblue;
 }
+
+.slider {
+	width: 200px;
+	height: 200px;
+	background: white;
+	position: relative;
+}

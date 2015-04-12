@@ -10,18 +10,22 @@ define([
         urlRoot: 'http://query.yahooapis.com/v1/public/yql?q=',
         yqlQuery: 'select * from weather.forecast where woeid in (select woeid from geo.places where text="',
         yqlOpts: '") and u="c"&format=json&diagnostics=true&callback=',
+        currentTemp: '',
+        name: '',
         
         url: function() {
             return this.urlRoot + encodeURIComponent(this.yqlQuery) + encodeURIComponent(this.options.name) + this.yqlOpts;
         },
 
         initialize: function() {
+            var _this = this;
             // update the default options with the attributes supplied when instance is created
-            this.options = _.extend({}, this.defaults, this.attributes); 
+            _this.options = _.extend({}, this.defaults, this.attributes);
         },
 
         defaults: {
-            name: 'London UK'
+            name: 'London UK',
+            currentTemp: null
         },
 
         parse: function(data) {

@@ -8,24 +8,32 @@ require.config({
         underscore: 'libs/underscore',
         mustache: 'libs/mustache',
         text: 'libs/text',
+        TweenLite: 'libs/greensock/TweenLite',
+        CSSPlugin: 'libs/greensock/plugins/CSSPlugin',
+        EasePack: 'libs/greensock/easing/EasePack',
 
-        weatherApp: 'weatherApp',
+        shim: {
+            TweenLite: {
+                exports: 'TweenLite'
+            }
+        },
+
+        // Initial View
+        weatherApp: 'weatherApp', //  Initialises router
 
         // Routers
-        appRouter: 'routes/appRouter',
-
-        // Collections
-        cities: 'collections/cities',
+        appRouter: 'routes/appRouter', // Set pages (About | Home)
 
         // // Models
-        city: 'models/city',
-        flickR: 'models/flickr',
+        modelCity: 'models/city', // Get weather information for default cities
 
-        // // Views
+        // Collections
+        collectionCities: 'collections/cities', // Store all cities as collection 
+
+        // Views
         viewHome: 'views/viewHome',
         viewAbout: 'views/viewAbout',
-        cityView: 'views/viewCity',
-        flickrView: 'views/flickrView',
+        viewCity: 'views/viewCity',
 
     }
 });
@@ -33,12 +41,15 @@ require.config({
 require([
     'backbone',
     'weatherApp',
+    'TweenLite',
+    'CSSPlugin',
+    'EasePack',
     'underscore',
     'mustache'
 ], function (Backbone, WeatherApp) {
 
     new WeatherApp({
-        el: '#weather_app',
+        el: '#wheresHot',
     });
 
 });
