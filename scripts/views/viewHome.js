@@ -7,8 +7,9 @@ define([
     'mustache',
     'text!templates/layout.html',
     'modelCity',
-    'collectionCities'
-], function ($, _, Backbone, Mustache, layout, ModelCity, CollectionCities) {
+    'collectionCities',
+    'viewCity'
+], function ($, _, Backbone, Mustache, layout, ModelCity, CollectionCities, ViewCity) {
     'use strict';
 
     var layoutView = Backbone.View.extend({
@@ -80,7 +81,6 @@ define([
                 //onThrowComplete is used by the ThrowProps tween. We'll stop updating the velocity when the tween is done.
                 onThrowComplete: function() {
                     TweenLite.ticker.removeEventListener('tick', setTemp);
-                    _this.checkTemp();
                 }
             });
 
@@ -93,6 +93,7 @@ define([
 
                 // update the number
                 $value.text(Math.round(temp));
+                _this.checkTemp();
             }
         },
 
@@ -101,12 +102,16 @@ define([
                 temp = parseInt(_this.slider.find('.value').text());
 
 
-            var hotterThanThat = _this.cityCollection.select(function(city) {
+            var hotterCities = _this.cityCollection.select(function(city) {
                 return city.attributes.item.condition.temp > temp;
             });
 
-            console.log(hotterThanThat);
-        }
+            for (var i = hotterCities.length - 1; i >= 0; i--) {
+                var cityView = new ViewCity({model: hotterCities[i]});
+            }
+        },
+
+
     });
 
     return layoutView;

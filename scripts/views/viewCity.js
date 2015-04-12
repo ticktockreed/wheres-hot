@@ -19,17 +19,18 @@ define([
         },
 
         initialize: function () {
-            this.listenTo(this.model, 'change', this.render);
+            this.render();
         },
 
         render: function () {
             var _this = this;
+            console.log(this.model.toJSON());
 
             this.template = Mustache.to_html(cityTplt, this.model.toJSON());
 
+            console.log(this.model.toJSON().name);
+
             this.$el.append(this.template, this.model.toJSON());
-            $('#content .city').first().addClass('open');
-            $('#content .city').first().height(window.innerHeight - 100);
         },
 
         showForecast: function(ev) {
@@ -37,6 +38,19 @@ define([
             $('.city.open').removeClass('open');
             $(ev.target).parents('.city').addClass('open');
             $(ev.target).parents('.city').height(window.innerHeight - 100);
+        },
+        
+        destroy_view: function() {
+
+            // COMPLETELY UNBIND THE VIEW
+            this.undelegateEvents();
+
+            this.$el.removeData().unbind(); 
+
+            // Remove view from DOM
+            this.remove();  
+            Backbone.View.prototype.remove.call(this);
+
         }
     });
 
