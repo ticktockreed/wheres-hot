@@ -65,24 +65,34 @@ define([
             var sliderHeight = $('.slider').height(),
                 highTemp = 55,
                 lowTemp = -40,
-                tempRange =  lowTemp - highTemp;
+                tempRange = lowTemp - highTemp;
+
+            function setTemp() {
+                // calculate the temperature within the range specified
+                var position = sliderHeight - draggable.y;
+                var temp = -((position/sliderHeight * tempRange) - lowTemp);
+
+                // update the number
+                $(draggable.target).html(Math.ceil(temp));
+            }
 
             // make the slider dragable with a bit of GSAP
             Draggable.create('.handle', {
-                type:'x,y', 
+                type:'y', 
                 edgeResistance:0.85, 
                 bounds:'.slider', 
                 throwProps:true, 
                 onDrag: function() {
-
-                    // calculate the temperature within the range specified
-                    var position = sliderHeight - this.y;
-                    var temp = -((position/sliderHeight * tempRange) - lowTemp);
-
-                    // update the number
-                    $(this.target).html(Math.ceil(temp));
+                    TweenLite.ticker.addEventListener("tick", setTemp());
+                },
+                //onThrowComplete is used by the ThrowProps tween. We'll stop updating the velocity when the tween is done.
+                onThrowComplete: function() {
+                    TweenLite.ticker.removeEventListener("tick", setTemp());
                 }
             });
+
+            var draggable = Draggable.get('.handle');
+
         },
 
         checkTemp: function(e) {
