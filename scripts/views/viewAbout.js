@@ -19,7 +19,8 @@ define([
         },
 
         render: function () {
-            this.$el.find('#aboutContent').html(this.template);
+            this.$el.find('#content').html(this.template);
+            // this.$el.find('#content').fadeIn('fast');
             $('.nav li').removeClass('active');
             $('.nav .about').addClass('active');
         }

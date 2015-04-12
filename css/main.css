@@ -18,11 +18,14 @@ header {
 	text-transform: uppercase;
 }
 header .about {
-	position: absolute;
-	top: 0;
-	right: 0;
-	padding: 10px 15px;
-
+	width: 100%;
+	padding: 10px 0;
+	text-align: center;
+}
+header .about a {
+	text-decoration: none;
+	font-weight: 200;
+	color: white;
 }
 header .app-title {
 	font-weight: 800;
@@ -39,10 +42,6 @@ header .app-title .hot {
 	color: #f57171;
 }
 
-header .app-title .or {
-
-}
-
 header .app-title .not {
 	color: #71a2f5;
 }
@@ -50,15 +49,6 @@ header .app-title .not {
 header .app-title .cities {
 	font-weight: 200;
 	color: white;
-}
-
-footer {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	opacity: 0.4;
-	text-align: center;
 }
 
 #wheresHot {
@@ -75,6 +65,26 @@ footer {
 	top: 20%;
 	z-index: 10;
 }
+@media screen and (max-height: 600px) {
+
+	.slider {
+		height: 70%;
+		width: 1px;
+		margin: 0 auto;
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 30%;
+		z-index: 10;
+	}
+}0;
+}
+@media screen and (max-width: 600px) {
+	.city .city-name {
+		font-size: 60px;
+	}
+}
 .handle {
 	width: 50px;
 	height: 50px;
@@ -89,10 +99,59 @@ footer {
 .city {
 	position: absolute;
 	opacity: 0;
+	left: 0;
+	right: 0;
+	background-color: skyblue;
+	color: white;
+  	min-height: 400px;
     transition: opacity 200ms;
     transition-delay: 200ms;
 }
 .city.show {
 	opacity: 1;
     transition: opacity 200ms;
+}
+
+.city .city-name {
+	font-weight: 800;
+	position: absolute;
+	left: 0;
+	padding: 20px;
+	text-align: left;
+	font-size: 80px;
+}
+.city .city-country {	
+	font-size: 30px;
+}
+.city .city-temp {
+	font-weight: 200;
+	font-size: 70px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	padding: 20px;
+}
+
+#content {
+  margin-top: 180px;
+  padding: 20px;
+  text-align: center;
+}
+#content p {
+  color: darkslategray;
+}
+.rte {
+	width: 70%;
+	margin: 0 auto;
+}
+footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	padding: 5px;
+	font-size: 14px;
+	font-weight: 200;
+	color: white;
 }
