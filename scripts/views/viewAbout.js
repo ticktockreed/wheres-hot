@@ -19,7 +19,7 @@ define([
         },
 
         render: function () {
-            this.$el.find('#content').html(this.template);
+            this.$el.find('#aboutContent').html(this.template);
             $('.nav li').removeClass('active');
             $('.nav .about').addClass('active');
         }
