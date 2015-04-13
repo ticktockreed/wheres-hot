@@ -10,9 +10,9 @@ define([
 
     var utils = {
         percentColors: [
-            { pct: 0.0, color: { r: 0, g: 0x00, b: 0xff } }, 
-            { pct: 0.5, color: { r: 0xff, g: 0xff, b: 0 } },
-            { pct: 1.0, color: { r: 0xff, g: 0x00, b: 0 } }
+            { pct: 0.0, color: { r: 0, g: 120, b: 255 } }, 
+            { pct: 0.5, color: { r: 255, g: 255, b: 0 } },
+            { pct: 1.0, color: { r: 255, g: 120, b: 0 } }
         ],
 
         getColorForPercentage: function(pct) {
@@ -32,6 +32,7 @@ define([
                 g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
                 b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
             };
+            console.log(color);
             return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
             // or output as hex if preferred
         }  
