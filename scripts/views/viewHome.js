@@ -4,12 +4,13 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'utils',
     'mustache',
     'text!templates/layout.html',
     'modelCity',
     'collectionCities',
     'viewCity'
-], function ($, _, Backbone, Mustache, layout, ModelCity, CollectionCities, ViewCity) {
+], function ($, _, Backbone, utils, Mustache, layout, ModelCity, CollectionCities, ViewCity) {
     'use strict';
 
     var layoutView = Backbone.View.extend({
@@ -114,6 +115,11 @@ define([
                 // calculate the temperature within the range specified
                 var position = sliderHeight - draggable.y;
                 var temp = -((position/sliderHeight * tempRange) - lowTemp);
+
+                var backgroundColour = utils.getColorForPercentage(position/sliderHeight);
+
+                console.log('percentage', position/sliderHeight);
+                $('body').css('background-color', backgroundColour);
 
                 // update the number
                 $value.text(Math.round(temp));

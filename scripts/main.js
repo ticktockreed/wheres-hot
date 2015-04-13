@@ -3,6 +3,7 @@
 
 require.config({
     paths: {
+        utils: 'utils',
         jquery: 'libs/jquery-1.11.2',
         backbone: 'libs/backbone',
         underscore: 'libs/underscore',
@@ -10,6 +11,7 @@ require.config({
         text: 'libs/text',
         TweenLite: 'libs/greensock/TweenLite',
         CSSPlugin: 'libs/greensock/plugins/CSSPlugin',
+        ColorPropsPlugin: 'libs/greensock/plugins/ColorPropsPlugin',
         EasePack: 'libs/greensock/easing/EasePack',
         Draggable: 'libs/greensock/utils/Draggable',
         ThrowProps: 'libs/greensock/plugins/ThrowPropsPlugin',
@@ -43,14 +45,16 @@ require.config({
 require([
     'backbone',
     'weatherApp',
+    'utils',
     'TweenLite',
     'CSSPlugin',
+    'ColorPropsPlugin',
     'EasePack',
     'Draggable',
     'ThrowProps',
     'underscore',
     'mustache'
-], function (Backbone, WeatherApp) {
+], function (Backbone, WeatherApp, utils) {
 
     new WeatherApp({
         el: '#wheresHot',

@@ -100,7 +100,6 @@ header .app-title .cities {
 	left: 0;
 	right: 0;
 	opacity: 0;
-	background-color: skyblue;
 	color: white;
   	min-height: 400px;
     transition: opacity 200ms;
