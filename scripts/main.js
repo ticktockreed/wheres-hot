@@ -29,7 +29,7 @@ require.config({
         appRouter: 'routes/appRouter', // Set pages (About | Home)
 
         // // Models
-        modelCity: 'models/city', // Get weather information for default cities
+        modelCity: 'models/modelCity', // Get weather information for default cities
 
         // Collections
         collectionCities: 'collections/cities', // Store all cities as collection 

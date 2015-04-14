@@ -36,6 +36,7 @@ define([
         events: {
             'mousedown .handle': 'growHandle',
             'mouseup .handle': 'shrinkHandle',
+            'click .city': 'shrinkHandle',
             'touchstart .handle': 'growHandle',
             'touchend .handle': 'shrinkHandle'
         },
@@ -116,10 +117,11 @@ define([
                 var position = sliderHeight - draggable.y;
                 var temp = -((position/sliderHeight * tempRange) - lowTemp);
 
-                var backgroundColour = utils.getColorForPercentage(position/sliderHeight);
+                var lightColour = utils.getColorForPercentage(position/sliderHeight, true);
+                var darkColour = utils.getColorForPercentage(position/sliderHeight, false);
 
-                console.log('percentage', position/sliderHeight);
-                $('body').css('background-color', backgroundColour);
+
+                $('body').css('background', '-webkit-radial-gradient(80% 70%, farthest-side, ' + lightColour + ',' + darkColour + ')');
 
                 // update the number
                 $value.text(Math.round(temp));
