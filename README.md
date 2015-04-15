@@ -1,16 +1,27 @@
+# Which is the hottest city for fashion right now?
 
-#Where's hot?..?
+Whether you like it hot or cool, this app will tell you where to find the best temperatures in the best cities with the hottest (or coolest) outfits.
 
-Who doesnt want to know where is hot? Some people like it swealtering, some people like it cool. Some people like it dry some people like to sweat it out.
+## Features
 
-This app has one simple function - **Tell me where it is the temperature that i like right now**
-Use the slider to change the temperature and see where is hot right now!
+*   Simple UI
+*   Responsive - Built mobile first
+*   Weather data gathered from YQL showing the current temperature for the top fashion cities of the world
+*   Built using RequireJS, AMD modules, Backbone, GSAP for UI and animation, and a sprinkling of CSS3
 
-The app uses the following tech:
+## Future additions:
 
-requireJS - dependency management and async loading
-Backbone - MV*
-GSAP - animations
+*   Tweets for #ootd or #fashion - based on city geo coordinates could be added to each city view - possibly showing pictures
+*   App could suggest clothing for the type of weather you are seeing at each city - possibly linked to
+*   Forecast/current view - switch between views to see what the weather will be like for the coming week
+*   Show flight costs to the city
+
+Use the slider to change the temperature and see where is hot right how
+
+Source code available on [on GitHub](https://github.com/ticktockreed/wheres-hot)
+
+View a working demo at [Where's Hot?](wheres-hot.alloftheabove.co.uk)
+
 
 
 Source code available on [on GitHub][1]

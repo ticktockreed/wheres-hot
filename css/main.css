@@ -153,6 +153,7 @@ header .app-title .fashion {
 .rte h3 {
 	font-size: 20px;
 }
+.rte ul,
 .rte p {
   color: white;
   margin-bottom: 10px;
@@ -161,6 +162,18 @@ header .app-title .fashion {
 .rte a {
   color: white;
   text-decoration: underline;
+}
+.rte ul {
+	max-width: 300px;
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 30px;
+}
+.rte li {
+  color: white;
+  list-style: disc;
+  text-align: left;
 }
 footer {
 	position: fixed;
