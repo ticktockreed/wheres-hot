@@ -9,12 +9,10 @@ define([
 
     var CitiesCollection = Backbone.Collection.extend({
 
-        comparator: function(collection) {
-            // console.log(collection);
+        comparator: function() {
+            // return this.get('item').condition.temp;
         },
-
-        initialize: function(models, options) {
-            var _this = this;
+        initialize: function() {
         }
     });
 

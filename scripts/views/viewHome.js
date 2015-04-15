@@ -32,11 +32,12 @@ define([
         ],
         cityCollection: null,
         slider: null,
+        highTemp: 40,
+        lowTemp: -10,
 
         events: {
             'mousedown .handle': 'growHandle',
             'mouseup .handle': 'shrinkHandle',
-            'click .city': 'shrinkHandle',
             'touchstart .handle': 'growHandle',
             'touchend .handle': 'shrinkHandle'
         },
@@ -64,6 +65,8 @@ define([
             
             _this.initSlider();
 
+            var counter = 1;
+
             // loop through the default list of cities
             for (var i = _this.cityQueries.length - 1; i >= 0; i--) {
                 var city = new ModelCity({name: _this.cityQueries[i].query});
@@ -72,9 +75,32 @@ define([
                 city.set({placeID: 'place_' + i});
 
                 // collect weather data for each city
-                city.fetch();
+                city.fetch({
+                    success: function() {
+                        if (counter === _this.cityQueries.length) {
+                            _this.cityCollection.each(function(city) {
+                                var storedTemp = null;
 
-                // add them to the collection
+                                city.currentTemp = city.attributes.item.condition.temp;
+
+                                var tempRange = _this.highTemp + _this.lowTemp,
+                                    inversePct = tempRange-city.currentTemp,
+                                    cityPosition = (inversePct/tempRange) * 100;
+
+                                if (storedTemp === city.currentTemp) {
+                                    cityPosition = cityPosition + 5;
+                                }
+
+                                $('#' + city.get('placeID')).css('top', cityPosition + '%');
+
+                                storedTemp = city.currentTemp;
+                            });
+                        }
+                        counter++;
+                    }
+                });
+
+                // // add them to the collection
                 _this.cityCollection.add(city);
             }
 
@@ -89,9 +115,9 @@ define([
             _this.slider = $('.slider');
             
             var sliderHeight = _this.slider.height(),
-                highTemp = 40,
-                lowTemp = -10,
-                tempRange = lowTemp - highTemp, 
+                highTemp = _this.highTemp,
+                lowTemp = _this.lowTemp,
+                tempRange =  lowTemp - highTemp, 
                 $value = _this.slider.find('.value'),
                 draggable;
 
@@ -114,32 +140,38 @@ define([
 
             function setTemp() {
                 // calculate the temperature within the range specified
-                var position = sliderHeight - draggable.y;
-                var temp = -((position/sliderHeight * tempRange) - lowTemp);
+                var position = sliderHeight - draggable.y,
+                    percentage = position/sliderHeight,
+                    temp = -((percentage * tempRange) - lowTemp);
 
-                var lightColour = utils.getColorForPercentage(position/sliderHeight, true);
-                var darkColour = utils.getColorForPercentage(position/sliderHeight, false);
+                var lightColour = utils.getColorForPercentage(percentage, true);
+                var darkColour = utils.getColorForPercentage(percentage, false);
 
 
                 $('body').css('background', '-webkit-radial-gradient(80% 70%, farthest-side, ' + lightColour + ',' + darkColour + ')');
 
                 // update the number
                 $value.text(Math.round(temp));
-                _this.checkTemp();
+
+                // should we show the city or not?
+                _this.checkTemp(percentage);
             }
         },
 
-        checkTemp: function() {
+        checkTemp: function(percentage) {
             var _this = this,
-                temp = parseInt(_this.slider.find('.value').text());
+                temp = parseInt(_this.slider.find('.value').text()),
+                inversePercentage = Math.round((1-percentage) *100);
 
             // check if the city's temperature sits within the range
             var citiesAtTemp = _this.cityCollection.select(function(city) {
                 var cityTemp = city.attributes.item.condition.temp;
-                return cityTemp < (temp + 5) && cityTemp > (temp - 5);
+                return cityTemp < (temp + 1) && cityTemp > (temp - 1);
             });
 
             _this.$el.find('.city').removeClass('show');
+
+            var logTemp = 0;
 
             // show the views that fit within the range
             for (var i = citiesAtTemp.length - 1; i >= 0; i--) {
