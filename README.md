@@ -1,4 +1,4 @@
-# Which is the hottest city for fashion right now?
+# Which is the hottest city in fashion right now?
 
 Whether you like it hot or cool, this app will tell you where to find the best temperatures in the best cities with the hottest (or coolest) outfits.
 
