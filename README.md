@@ -22,7 +22,8 @@ Source code available on [on GitHub](https://github.com/ticktockreed/wheres-hot)
 
 View a working demo at [Where's Hot?](wheres-hot.alloftheabove.co.uk)
 
-
+## To run locally
+Set up a site though IIS, Apache, or node, or just view at the demo link above.
 
 Source code available on [on GitHub][1]
 
