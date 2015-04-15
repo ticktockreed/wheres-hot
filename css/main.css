@@ -6,6 +6,8 @@ body {
 
 body {
 	font-family: 'Lato', sans-serif;
+	background: rgb(198, 114, 67);
+	background: linear-gradient(to right bottom, rgb(198, 114, 67) 100%, rgb(105, 63, 38) 10%);
 	background: -webkit-radial-gradient(80% 70%, ellipse farthest-side, rgb(198, 112, 66), rgb(104, 61, 37));
 }
 

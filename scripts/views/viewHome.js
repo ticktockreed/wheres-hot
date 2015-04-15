@@ -146,10 +146,12 @@ define([
                 var lightColour = utils.getColorForPercentage(percentage, true);
                 var darkColour = utils.getColorForPercentage(percentage, false);
 
-
+                // set the background colour with fallbacks
+                $('body').css('background-color', darkColour);
+                $('body').css('background', 'linear-gradient(to bottom right,' + lightColour + ' 100%, ' + darkColour + ' 10%)');
                 $('body').css('background', '-webkit-radial-gradient(80% 70%, farthest-side, ' + lightColour + ',' + darkColour + ')');
 
-                // update the number
+                // update the number in the roundel
                 $value.text(Math.round(temp));
 
                 // should we show the city or not?
