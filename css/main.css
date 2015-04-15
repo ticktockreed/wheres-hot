@@ -25,6 +25,7 @@ header .about a {
 	text-decoration: none;
 	font-weight: 200;
 	color: white;
+	border-bottom: 1px solid;
 }
 header .app-title {
 	font-weight: 800;
@@ -34,18 +35,15 @@ header .app-title {
 }
 header .app-title a {
 	text-decoration: none;
-	color: #d9eff8;
+	color: white;
 }
 
 header .app-title .hot {
 	color: #f57171;
+	color: white;
 }
 
-header .app-title .not {
-	color: #71a2f5;
-}
-
-header .app-title .cities {
+header .app-title .fashion {
 	font-weight: 200;
 	color: white;
 }
@@ -58,11 +56,13 @@ header .app-title .cities {
 	width: 1px;
 	margin: 0 auto;
 	position: absolute;
-	right: 70px;
+	left: 0;
+	right: 0;
 	bottom: 0;
 	top: 20%;
 	z-index: 10;
 }
+
 @media screen and (max-height: 600px) {
 
 	.slider {
@@ -137,12 +137,30 @@ header .app-title .cities {
   padding: 20px;
   text-align: center;
 }
-#content p {
-  color: darkslategray;
-}
 .rte {
 	width: 70%;
 	margin: 0 auto;
+}
+.rte h2,
+.rte h3 {
+	font-size: 30px;
+	font-weight: 200;
+	text-transform: uppercase;
+	color: white;
+	margin-bottom: 20px;
+	margin-top: 15px;
+}
+.rte h3 {
+	font-size: 20px;
+}
+.rte p {
+  color: white;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.rte a {
+  color: white;
+  text-decoration: underline;
 }
 footer {
 	position: fixed;
