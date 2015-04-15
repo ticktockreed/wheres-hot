@@ -16,15 +16,11 @@ Whether you like it hot or cool, this app will tell you where to find the best t
 *   Forecast/current view - switch between views to see what the weather will be like for the coming week
 *   Show flight costs to the city
 
-Use the slider to change the temperature and see where is hot right how
-
-Source code available on [on GitHub](https://github.com/ticktockreed/wheres-hot)
-
-View a working demo at [Where's Hot?](http://wheres-hot.alloftheabove.co.uk)
-
 ## To run locally
 Set up a site though IIS, Apache, or Node, or just view at the demo link above.
 
-Source code available on [on GitHub][1]
+View a working demo at [Where's Hot?](http://wheres-hot.alloftheabove.co.uk)
 
-[1]:https://github.com/ticktockreed/wheres-hot
+**Use the slider to change the temperature and see where is hot right how**
+
+Source code available on [on GitHub](https://github.com/ticktockreed/wheres-hot)
