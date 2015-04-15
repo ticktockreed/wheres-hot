@@ -12,7 +12,7 @@ Whether you like it hot or cool, this app will tell you where to find the best t
 ## Future additions:
 
 *   Tweets for #ootd or #fashion - based on city geo coordinates could be added to each city view - possibly showing pictures
-*   App could suggest clothing for the type of weather you are seeing at each city - possibly linked to
+*   App could suggest clothing for the type of weather you are seeing at each city - with link to buy products
 *   Forecast/current view - switch between views to see what the weather will be like for the coming week
 *   Show flight costs to the city
 
