@@ -93,14 +93,14 @@ header .app-title .cities {
 	left: -25px;
 }
 .city {
-	position: absolute;
 	bottom: 0;
+	position: relative;
 	left: 0;
 	right: 0;
 	opacity: 0;
 	color: white;
-    transition: opacity 200ms;
-    transition-delay: 200ms;
+    transition: opacity 400ms;
+    transition-delay: 300ms;
 }
 .city.show {
 	opacity: 1;
@@ -109,28 +109,28 @@ header .app-title .cities {
 
 .city .city-name {
 	font-weight: 800;
-	/*position: absolute;*/
+	position: absolute;
 	left: 0;
 	padding: 20px;
 	text-align: left;
-	font-size: 80px;
+	font-size: 20px;
 }
 
 @media screen and (max-width: 600px) {
 	.city .city-name {
-		font-size: 50px;
+		font-size: 20px;
 	}
 }
 .city .city-country {	
-	font-size: 30px;
+	font-size: 14px;
 }
 .city .city-temp {
-	font-weight: 200;
-	font-size: 70px;
-	/*position: absolute;*/
-	right: 0;
-	bottom: 10%;
-	padding: 20px;
+  font-weight: 200;
+  font-size: 30px;
+  position: absolute;
+  right: 0;
+  /* bottom: 10%; */
+  padding: 20px;
 }
 
 #content {

@@ -11,6 +11,57 @@
         <link rel="stylesheet" href="css/main.css">
         <link href='http://fonts.googleapis.com/css?family=Lato:100,400,900' rel='stylesheet' type='text/css'>
         <script src="scripts/libs/modernizr.custom.41594.js"></script>
+        <!-- 
+        <script type="text/javascript" src="scripts/libs/underscore.js"></script>
+        <script type="text/javascript" src="scripts/libs/backbone.js"></script>
+        <script type="text/javascript">
+
+            window.City = Backbone.Model.extend({
+                urlRoot: 'http://query.yahooapis.com/v1/public/yql?q=',
+                yqlQuery: 'select * from weather.forecast where woeid in (select woeid from geo.places where text="',
+                yqlOpts: '") and u="c"&format=json&diagnostics=true&callback=',
+                
+                url: function() {
+                    return this.urlRoot + encodeURIComponent(this.yqlQuery) + encodeURIComponent(this.options.name) + this.yqlOpts;
+                },
+                defaults: {
+                    name: "London UK",
+                    currentTemp: "10"
+               }
+            });
+
+
+            window.YqlCollection = Backbone.Collection.extend({
+                query: '',
+                url: 'http://query.yahooapis.com/v1/public/yql',
+                format: 'json',
+                timeout: 10000,
+                dataType: 'jsonp',
+                fetch: function (options) {
+                    options = options ? _.clone(options) : {};
+                    options.data = options.data ? _.clone(options.data) : {};
+                    if (!options.data.q) {
+                        options.data.q = _.result(this, 'query')
+                    }
+                    if (!options.data.format) {
+                        options.data.format = _.result(this, 'format');
+                    }
+                    return Backbone.Collection.prototype.fetch.call(this, options);
+                },
+                sync: function(method, model, options){
+                    options.timeout = _.result(this, 'timeout');
+                    options.dataType = _.result(this, 'dataType');
+                    return Backbone.sync(method, model, options);
+                },
+                parse: function(response) {
+                    return response.query.results.json.json;
+                }
+            });
+
+
+            var city1 = new City({name: 'London UK'});
+        </script>
+         -->
     </head>
     <body>
         <!--[if lt IE 10]>

@@ -78,22 +78,22 @@ define([
                 city.fetch({
                     success: function() {
                         if (counter === _this.cityQueries.length) {
+
+                            // Sort teh cities into temp order
+                            _this.cityCollection.comparator = function(sortedCity) {
+                                return -sortedCity.attributes.item.condition.temp;
+                            };
+                            _this.cityCollection.sort();
+
+                            // render each city view to the page
                             _this.cityCollection.each(function(city) {
-                                var storedTemp = null;
 
-                                city.currentTemp = city.attributes.item.condition.temp;
+                                var viewCity = new ViewCity({model: city});
 
-                                var tempRange = _this.highTemp + _this.lowTemp,
-                                    inversePct = tempRange-city.currentTemp,
-                                    cityPosition = (inversePct/tempRange) * 100;
+                                viewCity.render();
 
-                                if (storedTemp === city.currentTemp) {
-                                    cityPosition = cityPosition + 5;
-                                }
+                                $('#' + city.get('placeID')).css('height', '40px');
 
-                                $('#' + city.get('placeID')).css('top', cityPosition + '%');
-
-                                storedTemp = city.currentTemp;
                             });
                         }
                         counter++;
@@ -104,9 +104,8 @@ define([
                 _this.cityCollection.add(city);
             }
 
-            _this.cityCollection.each(function(place, index) {
-                var cityView = new ViewCity({model: place});
-            });
+            // _this.cityCollection.each(function(place, index) {
+            // });
         },
 
         initSlider: function() {
@@ -166,7 +165,7 @@ define([
             // check if the city's temperature sits within the range
             var citiesAtTemp = _this.cityCollection.select(function(city) {
                 var cityTemp = city.attributes.item.condition.temp;
-                return cityTemp < (temp + 1) && cityTemp > (temp - 1);
+                return cityTemp < (temp + 3) && cityTemp > (temp - 3);
             });
 
             _this.$el.find('.city').removeClass('show');
