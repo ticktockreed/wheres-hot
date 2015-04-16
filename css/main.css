@@ -119,6 +119,7 @@ header .app-title .fashion {
 }
 .rte {
 	width: 70%;
+	min-width: 300px;
 	margin: 0 auto;
 }
 .rte h2,
