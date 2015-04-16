@@ -34,6 +34,7 @@ define([
         slider: null,
         highTemp: 40,
         lowTemp: -10,
+        tempRange: 0,
 
         events: {
             'mousedown .handle': 'growHandle',
@@ -62,8 +63,6 @@ define([
 
             // create a collection for the cities
             _this.cityCollection = new CollectionCities();
-            
-            _this.initSlider();
 
             var counter = 1;
 
@@ -77,9 +76,11 @@ define([
                 // collect weather data for each city
                 city.fetch({
                     success: function() {
+
+                        // When we have the last city
                         if (counter === _this.cityQueries.length) {
 
-                            // Sort teh cities into temp order
+                            // Sort the cities into temp order
                             _this.cityCollection.comparator = function(sortedCity) {
                                 return -sortedCity.attributes.item.condition.temp;
                             };
@@ -95,6 +96,8 @@ define([
                                 $('#' + city.get('placeID')).css('height', '40px');
 
                             });
+
+                            _this.initSlider();
                         }
                         counter++;
                     }
@@ -104,21 +107,22 @@ define([
                 _this.cityCollection.add(city);
             }
 
-            // _this.cityCollection.each(function(place, index) {
-            // });
         },
 
         initSlider: function() {
-
             var _this =  this;
-            _this.slider = $('.slider');
+
+            _this.slider = $('.slider'),
+            _this.slider.handle = _this.slider.find('.handle'),
+            _this.sliderHeight = _this.slider.height();
+
+            // show the slider
+            _this.slider.handle.fadeIn('fast');
             
-            var sliderHeight = _this.slider.height(),
-                highTemp = _this.highTemp,
-                lowTemp = _this.lowTemp,
-                tempRange =  lowTemp - highTemp, 
-                $value = _this.slider.find('.value'),
-                draggable;
+            var $value = _this.slider.find('.value'),
+                handle;
+
+            _this.tempRange = _this.highTemp + (-_this.lowTemp),
 
             // make the slider dragable with a bit of GSAP
             Draggable.create('.handle', {
@@ -135,14 +139,29 @@ define([
                 }
             });
 
-            draggable = Draggable.get('.handle');
+            handle = Draggable.get('.handle');
 
-            function setTemp() {
+            // get the temp and y position for the hottest city
+            var hottestTemp = parseInt(_this.cityCollection.first().get('item').condition.temp) - _this.lowTemp;
+            var hottestTempPosition = _this.tempAsPosition(hottestTemp);
+
+            // Animate the slider when we load the page
+            TweenLite.to(_this.slider.handle, 2, {y: hottestTempPosition, onUpdate: function () {
+                setTemp(_this.slider.handle);
+            }});
+
+            function setTemp($handle) {
+
+                // get the handle position - depending if we are animating or dragging
+                var handlePosition = $handle ? $handle[0]._gsTransform.y : handle.y;
+
+                // 
+                var temp = ((1-(handlePosition/_this.sliderHeight)) * _this.tempRange) + _this.lowTemp;
+
                 // calculate the temperature within the range specified
-                var position = sliderHeight - draggable.y,
-                    percentage = position/sliderHeight,
-                    temp = -((percentage * tempRange) - lowTemp);
+                var percentage = 1 - (handlePosition/_this.sliderHeight);
 
+                // calculate colour values
                 var lightColour = utils.getColorForPercentage(percentage, true);
                 var darkColour = utils.getColorForPercentage(percentage, false);
 
@@ -157,6 +176,13 @@ define([
                 // should we show the city or not?
                 _this.checkTemp(percentage);
             }
+        },
+
+        tempAsPosition: function(temp) {
+            var percentage = 1 - (temp/this.tempRange);
+            var tempAsPosition = Math.round(percentage * this.slider.height())
+            console.log('tempAsPosition', tempAsPosition);
+            return tempAsPosition;
         },
 
         checkTemp: function(percentage) {

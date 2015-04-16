@@ -25,7 +25,7 @@ header .about {
 }
 header .about a {
 	text-decoration: none;
-	font-weight: 200;
+	font-weight: 800;
 	color: white;
 	border-bottom: 1px solid;
 }
@@ -64,35 +64,19 @@ header .app-title .fashion {
 	top: 20%;
 	z-index: 10;
 }
-
-@media screen and (max-height: 600px) {
-
-	.slider {
-		height: 70%;
-		width: 1px;
-		margin: 0 auto;
-		position: absolute;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		top: 30%;
-		z-index: 10;
-	}
-	.city {
-		top: 30%;
-	}
-}
 .handle {
 	width: 50px;
 	height: 50px;
 	border-radius: 100px;
 	background: rgba(0,0,0,0.3);
 	color: white;
-	position: relative;
+	position: absolute;
+	bottom: 0;
 	margin-left: 0 auto;
 	line-height: 50px;
 	text-align: center;
 	left: -25px;
+	display: none;
 }
 .city {
 	bottom: 0;
@@ -116,12 +100,6 @@ header .app-title .fashion {
 	padding: 20px;
 	text-align: left;
 	font-size: 20px;
-}
-
-@media screen and (max-width: 600px) {
-	.city .city-name {
-		font-size: 20px;
-	}
 }
 .city .city-country {	
 	font-size: 14px;
@@ -161,16 +139,15 @@ header .app-title .fashion {
   margin-bottom: 10px;
   line-height: 1.4;
 }
-.rte a {
-  color: white;
-  text-decoration: underline;
-}
 .rte ul {
-	max-width: 300px;
 	width: 70%;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 30px;
+}
+.rte a {
+  color: white;
+  text-decoration: underline;
 }
 .rte li {
   color: white;
@@ -187,4 +164,30 @@ footer {
 	font-size: 14px;
 	font-weight: 200;
 	color: white;
+}
+
+
+
+@media screen and (max-height: 600px) {
+
+	.slider {
+		height: 70%;
+		width: 1px;
+		margin: 0 auto;
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 30%;
+		z-index: 10;
+	}
+	.city {
+		top: 30%;
+	}
+	.city .city-name {
+		font-size: 20px;
+	}
+	.rte ul {
+		max-width: 300px;
+	}
 }
