@@ -15,13 +15,13 @@ define([
         },
         
         home: function() {
-            console.log('Home');
+            // console.log('Home');
             var viewHome = new ViewHome;
             viewHome.render();
         },
         
         about: function() {
-            console.log('About');
+            // console.log('About');
             var viewAbout = new ViewAbout;
             viewAbout.render();
         }

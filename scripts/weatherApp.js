@@ -15,8 +15,6 @@ define([
 
         initialize: function () {
             this.render();
-            
-            console.log('Weather APP template');
             var appRouter = new AppRouter();
             Backbone.history.start();
         },

@@ -47,12 +47,12 @@ define([
             // this.render;
         },
 
-        growHandle: function(e) {
-           TweenLite.to(e.currentTarget, 0.1, {width: '80px', height: '80px', 'font-size': 24, lineHeight: '80px', left: '-40px', top: '-40px'} );
+        growHandle: function() {
+           TweenLite.to(this.slider.handle, 0.1, {width: '80px', height: '80px', 'font-size': 24, lineHeight: '80px', left: '-40px', top: '-40px'} );
         },
 
         shrinkHandle: function(e) {
-           TweenLite.to(e.currentTarget, 0.35, {width: '50px', height: '50px', 'font-size': 16, lineHeight: '50px', left: '-25px'} );
+           TweenLite.to(this.slider.handle, 0.35, {width: '50px', height: '50px', 'font-size': 16, lineHeight: '50px', left: '-25px'} );
         },
 
         render: function () {
@@ -136,6 +136,7 @@ define([
                 },
                 onThrowComplete: function() {
                     TweenLite.ticker.removeEventListener('tick', setTemp);
+                    _this.shrinkHandle(_this.slider.handle);
                 }
             });
 
