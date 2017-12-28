@@ -1,0 +1,23 @@
+{
+  "name": "wheres-hot",
+  "version": "1.0.0",
+  "description": "Weather info for the hottest cities in fashion",
+  "main": "-",
+  "scripts": {
+    "start": "http-server ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ticktockreed/wheres-hot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ticktockreed/wheres-hot/issues"
+  },
+  "homepage": "https://github.com/ticktockreed/wheres-hot#readme",
+  "devDependencies": {
+    "http-server": "^0.10.0"
+  }
+}
